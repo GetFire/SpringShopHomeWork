@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,40 +18,13 @@ public class User extends AbstractModel {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     @Transient
     private String confirmPassword;
-
-
-    public User(String login, String password, String confirmPassword) {
-        this.login = login;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.role = Role.USER;
-    }
-
-    public User() {
-    }
-
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-        this.role = Role.USER;
-    }
-
-    public User(String login, String password, Role role, String confirmPassword) {
-        this.login = login;
-        this.password = password;
-        this.role = role;
-        this.confirmPassword = confirmPassword;
-    }
-
-
-
-
 
 
 }

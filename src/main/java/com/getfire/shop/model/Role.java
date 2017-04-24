@@ -1,17 +1,23 @@
 package com.getfire.shop.model;
 
+import lombok.Data;
+import lombok.ToString;
 
-public enum Role {
-    ADMIN("ADMIN"), USER("USER");
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.Set;
 
+@Entity
+@Table(name = "roles")
+@Data
+@ToString
+public class Role extends AbstractModel {
+
+    @Column(name = "name")
     private String name;
-
-    Role(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
 }

@@ -7,28 +7,28 @@
 						    http://www.springframework.org/schema/security
 						    http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config="true">
-        <!--<intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')"/>-->
-        <intercept-url pattern="/welcome" access="hasAnyRole('USER','ADMIN')"/>
-        <intercept-url pattern="/admin" access="hasRole('ADMIN')"/>
-        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
-                    username-parameter="login" password-parameter="password"/>
+    <!--<http auto-config="true">-->
+        <!--&lt;!&ndash;<intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')"/>&ndash;&gt;-->
+        <!--<intercept-url pattern="/welcome" access="hasAnyRole('USER','ADMIN')"/>-->
+        <!--<intercept-url pattern="/admin" access="hasRole('ADMIN')"/>-->
+        <!--<form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"-->
+                    <!--username-parameter="login" password-parameter="password"/>-->
 
-        <logout logout-success-url="/login?logout"/>
-    </http>
+        <!--<logout logout-success-url="/login?logout"/>-->
+    <!--</http>-->
 
 
-    <b:bean id="encoder"
-            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <b:constructor-arg name="strength" value="11"/>
-    </b:bean>
+    <!--<b:bean id="encoder"-->
+            <!--class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">-->
+        <!--<b:constructor-arg name="strength" value="11"/>-->
+    <!--</b:bean>-->
 
-    <b:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.UserDetailsServiceImpl"/>
+    <!--<b:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.UserDetailsServiceImpl"/>-->
 
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder ref="encoder"></password-encoder>
-        </authentication-provider>
-    </authentication-manager>
+    <!--<authentication-manager alias="authenticationManager">-->
+        <!--<authentication-provider user-service-ref="userDetailsServiceImpl">-->
+            <!--<password-encoder ref="encoder"></password-encoder>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
 
 </b:beans>
