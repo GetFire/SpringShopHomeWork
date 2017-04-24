@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+						    http://www.springframework.org/schema/security
+						    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true">
+        <!--<intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')"/>-->
+        <intercept-url pattern="/welcome" access="hasAnyRole('USER','ADMIN')"/>
+        <intercept-url pattern="/admin" access="hasRole('ADMIN')"/>
+        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
+                    username-parameter="login" password-parameter="password"/>
+
+        <logout logout-success-url="/login?logout"/>
+    </http>
+
+
+    <b:bean id="encoder"
+            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <b:constructor-arg name="strength" value="11"/>
+    </b:bean>
+
+    <b:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.UserDetailsServiceImpl"/>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+</b:beans>

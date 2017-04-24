@@ -21,8 +21,8 @@ public class UserController {
 
     @Autowired
     public UserController(UserService userService, SecurityService securityService, UserValidator userValidator) {
-        this.userService = userService;
         this.securityService = securityService;
+        this.userService = userService;
         this.userValidator = userValidator;
     }
 
@@ -55,7 +55,7 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model){
         return "welcome";
     }

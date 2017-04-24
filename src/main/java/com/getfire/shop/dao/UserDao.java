@@ -1,9 +1,12 @@
 package com.getfire.shop.dao;
 
 import com.getfire.shop.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserDao extends JpaRepository<User, Long> {
+@Repository
+public interface UserDao {
 
     User findByLogin(String login);
+
+    void save(User user);
 }

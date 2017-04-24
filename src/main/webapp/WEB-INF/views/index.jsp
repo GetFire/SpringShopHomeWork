@@ -47,7 +47,7 @@
                 </li>
                 <li><a href="/users">Users</a></li>
             </ul>
-            <button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#modal-1">
+            <button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#modal-login">
                 <i class="fa fa-sign-in"></i> Login
             </button>
 
@@ -105,7 +105,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-1">
+<div class="modal fade" id="modal-login">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -124,10 +124,14 @@
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="password" value="">
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="confirm password" value="">
-                    </div>
                     <button type="submit" class="btn btn-success">Login</button>
+
+                    <form action="/registration">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-user-circle-o"></i> Create an account
+                        </button>
+                    </form>
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -136,6 +140,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.js"></script>

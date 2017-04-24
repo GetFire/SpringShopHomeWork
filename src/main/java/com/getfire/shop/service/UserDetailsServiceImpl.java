@@ -15,8 +15,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserDetailsServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -24,6 +28,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-        return new User(user.getLogin(),user.getPassword(), grantedAuthorities);
+        return new User(user.getLogin(), user.getPassword(), grantedAuthorities);
     }
 }

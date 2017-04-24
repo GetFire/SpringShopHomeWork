@@ -2,8 +2,6 @@ package com.getfire.shop.model;
 
 
 import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -11,8 +9,6 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "users")
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class User extends AbstractModel {
 
@@ -27,6 +23,34 @@ public class User extends AbstractModel {
 
     @Transient
     private String confirmPassword;
+
+
+    public User(String login, String password, String confirmPassword) {
+        this.login = login;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.role = Role.USER;
+    }
+
+    public User() {
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+        this.role = Role.USER;
+    }
+
+    public User(String login, String password, Role role, String confirmPassword) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.confirmPassword = confirmPassword;
+    }
+
+
+
+
 
 
 }
