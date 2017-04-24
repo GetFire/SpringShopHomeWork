@@ -26,7 +26,7 @@ public class User extends AbstractModel {
     private Role role;
 
     @Transient
-    transient private String confirmPassword;
+    private String confirmPassword;
 
 
 }
