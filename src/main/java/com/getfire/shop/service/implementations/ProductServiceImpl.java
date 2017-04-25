@@ -1,7 +1,8 @@
-package com.getfire.shop.service;
+package com.getfire.shop.service.implementations;
 
-import com.getfire.shop.dao.jpaDao.ProductDao;
+import com.getfire.shop.dao.ProductDao;
 import com.getfire.shop.model.Product;
+import com.getfire.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

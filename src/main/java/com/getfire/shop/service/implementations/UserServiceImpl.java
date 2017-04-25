@@ -1,9 +1,10 @@
-package com.getfire.shop.service;
+package com.getfire.shop.service.implementations;
 
-import com.getfire.shop.dao.jpaDao.RoleDao;
-import com.getfire.shop.dao.jpaDao.UserDao;
+import com.getfire.shop.dao.RoleDao;
+import com.getfire.shop.dao.UserDao;
 import com.getfire.shop.model.Role;
 import com.getfire.shop.model.User;
+import com.getfire.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,27 +29,6 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
     }
 
-    public UserServiceImpl() {
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-
-    public BCryptPasswordEncoder getEncoder() {
-        return encoder;
-    }
-
-    @Autowired
-    public void setEncoder(BCryptPasswordEncoder encoder) {
-        this.encoder = encoder;
-    }
 
     @Transactional
     public void saveUser(User user) {
@@ -60,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public User findByLogin(String login) {
-        return userDao.findByLogin(login);
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 }

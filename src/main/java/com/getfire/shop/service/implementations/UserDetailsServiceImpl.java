@@ -1,11 +1,11 @@
-package com.getfire.shop.service;
+package com.getfire.shop.service.implementations;
 
-import com.getfire.shop.dao.jpaDao.UserDao;
+import com.getfire.shop.dao.UserDao;
 import com.getfire.shop.model.Role;
+import com.getfire.shop.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,9 +16,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
-//public class UserDetailsServiceImpl  {
 
-    private final UserDao userDao;
+    private UserDao userDao;
 
     @Autowired
     public UserDetailsServiceImpl(UserDao userDao) {
@@ -26,14 +25,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        com.getfire.shop.model.User user = userDao.findByLogin(login);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.findByUsername(username);
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if (user != null) {
-            Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
             for (Role role : user.getRoles()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
             }
-            return new User(user.getLogin(), user.getPassword(), grantedAuthorities);
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
         }
         System.out.println("*******************************************");
         System.out.println("*******************************************");

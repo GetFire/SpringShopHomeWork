@@ -13,8 +13,8 @@ import java.util.Set;
 @ToString
 public class User extends AbstractModel {
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
     @Column(name = "password")
     private String password;
 

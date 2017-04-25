@@ -1,4 +1,4 @@
-package com.getfire.shop.dao.jpaDao;
+package com.getfire.shop.dao;
 
 import com.getfire.shop.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

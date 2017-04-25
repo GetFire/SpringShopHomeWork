@@ -10,9 +10,8 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserValidator implements Validator {
-//public class UserValidator  {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserValidator(UserService userService) {
@@ -28,22 +27,22 @@ public class UserValidator implements Validator {
     public void validate(Object object, Errors errors) {
         User user = (User) object;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "Required");
-        if (user.getLogin().length() < 6 || user.getLogin().length() > 30) {
-            errors.rejectValue("login", "Size.loginForm.login");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 30) {
+            errors.rejectValue("username", "Size.userForm.login");
         }
-        if (userService.findByLogin(user.getLogin()) != null) {
-            errors.rejectValue("login", "Duplicate.loginForm.login");
+        if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("username", "Duplicate.userForm.login");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
 
         if (user.getPassword().length() < 6 || user.getPassword().length() > 30) {
-            errors.rejectValue("password", "Size.loginForm.password");
+            errors.rejectValue("password", "Size.userForm.password");
         }
 
         if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("password", "Different.loginForm.password");
+            errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
     }
 }
