@@ -11,10 +11,11 @@
 
     <import resource="appconfig-mvc.xml"/>
 
-    <!--<import resource="appconfig-security.xml"/>-->
+    <import resource="appconfig-security.xml"/>
+
 
     <context:component-scan base-package="com.getfire.shop.*"/>
 
-    <!--<context:property-placeholder location="classpath:database.properties"/>-->
+    <context:property-placeholder location="classpath:database.properties"/>
 
 </beans>

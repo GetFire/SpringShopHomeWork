@@ -13,34 +13,34 @@ import org.springframework.stereotype.Service;
 public class SecurityServiceImpl implements SecurityService {
 
 
-//    private AuthenticationManager authenticationManager;
-//    private UserDetailsService userDetailsService;
-//
-//    @Autowired
-//    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
-//        this.authenticationManager = authenticationManager;
-//        this.userDetailsService = userDetailsService;
-//    }
-//
-//    @Override
-//    public String findLoggedInLogin() {
-//        val userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-//        if (userDetails instanceof UserDetails) {
-//            return ((UserDetails) userDetails).getUsername();
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public void autoLogin(String login, String password) {
-//
-//        val userDetails = userDetailsService.loadUserByUsername(login);
-//        UsernamePasswordAuthenticationToken authenticationToken =
-//                new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-//        authenticationManager.authenticate(authenticationToken);
-//        if (authenticationToken.isAuthenticated()) {
-//            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-//        }
-//
-//    }
+    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    public String findLoggedInLogin() {
+        val userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        if (userDetails instanceof UserDetails) {
+            return ((UserDetails) userDetails).getUsername();
+        }
+        return null;
+    }
+
+    @Override
+    public void autoLogin(String login, String password) {
+
+        val userDetails = userDetailsService.loadUserByUsername(login);
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        authenticationManager.authenticate(authenticationToken);
+        if (authenticationToken.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
+
+    }
 }
