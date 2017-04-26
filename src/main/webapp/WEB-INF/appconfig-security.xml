@@ -12,26 +12,32 @@
         <intercept-url pattern="/user" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/user/welcome" access="hasAnyRole('USER','ADMIN')"/>
         <intercept-url pattern="/user/admin" access="hasRole('ADMIN')"/>
-        <form-login login-page="/user/login" default-target-url="/user/welcome" authentication-failure-url="/user/login?error"
-                    username-parameter="login" password-parameter="password"/>
+
+        <form-login login-page="/user/login" default-target-url="/user/welcome"
+
+                    authentication-failure-url="/user/login?error"
+
+                    username-parameter="username" password-parameter="password"/>
+
+
         <logout logout-success-url="/user/login?logout"/>
+
     </http>
-
-
-
-    <beans:bean id="encoder"
-            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <beans:constructor-arg name="strength" value="11"/>
-    </beans:bean>
-
-    <beans:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.implementations.UserDetailsServiceImpl">
-    </beans:bean>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
+
+
+    <beans:bean id="userDetailsServiceImpl"
+                class="com.getfire.shop.service.implementations.UserDetailsServiceImpl"></beans:bean>
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
 
 
 
