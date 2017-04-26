@@ -45,7 +45,7 @@
                         <li><a href="/products/update/">Update</a></li>
                     </ul>
                 </li>
-                <li><a href="/users">Users</a></li>
+                <li><a href="/user">Users</a></li>
             </ul>
             <button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#modal-login">
                 <i class="fa fa-sign-in"></i> Login

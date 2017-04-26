@@ -1,12 +1,14 @@
 package com.getfire.shop.model;
 
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class AbstractModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 

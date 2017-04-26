@@ -45,7 +45,7 @@
                         <li><a href="/products/update/">Update</a></li>
                     </ul>
                 </li>
-                <li><a href="/users">Users</a></li>
+                <li><a href="/user">Users</a></li>
             </ul>
         </div>
     </div>

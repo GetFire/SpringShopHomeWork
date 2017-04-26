@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
+//public class MyWebAppInitializer  {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         XmlWebApplicationContext appContext = new XmlWebApplicationContext();

@@ -16,31 +16,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
-
-    private UserDao userDao;
-
     @Autowired
-    public UserDetailsServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private UserDao userDao;
 
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        if (user != null) {
-            for (Role role : user.getRoles()) {
-                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-            }
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        for (Role role : user.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-        System.out.println("*******************************************");
-        System.out.println("*******************************************");
-        System.out.println();
-        System.out.println(user);
-        System.out.println();
-        System.out.println("*******************************************");
-        System.out.println("*******************************************");
-        return null;
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+
     }
 }
+

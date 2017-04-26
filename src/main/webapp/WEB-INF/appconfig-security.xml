@@ -18,12 +18,14 @@
     </http>
 
 
+
     <beans:bean id="encoder"
             class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>
     </beans:bean>
 
-    <beans:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.implementations.UserDetailsServiceImpl"></beans:bean>
+    <beans:bean id="userDetailsServiceImpl" class="com.getfire.shop.service.implementations.UserDetailsServiceImpl">
+    </beans:bean>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
@@ -32,11 +34,6 @@
     </authentication-manager>
 
 
-    <!--<authentication-manager>-->
-    <!--<authentication-provider>-->
-    <!--<user-service>-->
-    <!--<user name="user" authorities="USER" password="user"/>-->
-    <!--</user-service>-->
-    <!--</authentication-provider>-->
-    <!--</authentication-manager>-->
+
+
 </beans:beans>
