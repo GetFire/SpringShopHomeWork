@@ -40,12 +40,8 @@
         <div class=" collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="/products" class="dropdown-toggle" data-toggle="dropdown">Products <b
-                            class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/products">See all </a></li>
-                        <li><a href="/products/update/">Update</a></li>
-                    </ul>
+                    <a href="/products" >Products </a>
+
                 </li>
                 <li><a href="/user">Users</a></li>
             </ul>
