@@ -2,9 +2,7 @@ package com.getfire.shop.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
@@ -19,4 +17,10 @@ public class Product extends AbstractModel {
     private int price;
     @Column(name = "description")
     private String description;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
 }
+

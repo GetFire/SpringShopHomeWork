@@ -26,7 +26,7 @@
     <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -64,10 +64,6 @@
                 <th>Manufacturer</th>
                 <th>Price</th>
                 <th>Description</th>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <th>Edit</th>
-                <th>Delete</th>
-                </sec:authorize>
             </tr>
             <c:forEach var="products" items="${productList}">
                 <tr>
@@ -77,44 +73,59 @@
                     <td>${products.price}</td>
                     <td>${products.description}</td>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <td colspan="2">
-                        <p><a href="/products/${products.id}"><button class="btn btn-warning btm-xs">Edit</button></a>
-                            <a href="/products/delete/${products.id}"><button class="btn btn-danger btn-xs">Delete</button></a>
-                        </p>
-                    </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/products/${products.id}">
+                                    <button class="btn btn-warning btn-md ">Edit</button>
+                                </a>
+                                <a href="/products/delete/${products.id}">
+                                    <button class="btn btn-danger btn-md">Delete</button>
+                                </a>
+                            </div>
+                        </td>
                     </sec:authorize>
                 </tr>
             </c:forEach>
         </table>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <br>
-        <h3>Add product</h3>
-        <form action="/products/save" method="POST">
-            <input type="hidden" name="id" value="">
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name"></td>
-                </tr>
-                <tr>
-                    <td>Manufacturer:</td>
-                    <td><input type="text" name="manufacturer"></td>
-                </tr>
-                <tr>
-                    <td>Price:</td>
-                    <td><input type="text" name="price"></td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td><input type="text" name="description"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Add</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+            <br>
+            <h3>New product</h3>
+            <form action="/products/save" method="POST" enctype="multipart/form-data">
+               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="hidden" name="id" value="">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name"></td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer:</td>
+                        <td><input type="text" name="manufacturer"></td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td><input type="text" name="price"></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td><input type="text" name="description"></td>
+                    </tr>
+                    <tr>
+                        <td>Photo:</td>
+                        <td><label>
+                            <input name="file" type="file">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn-md" type="submit">Add</button>
+                                <button class="btn btn-info btn-md" type="reset">Cancel</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </sec:authorize>
     </div>
 </div>

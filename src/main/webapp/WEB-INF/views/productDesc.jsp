@@ -80,10 +80,14 @@
                     </td>
                 </sec:authorize>
             </tr>
+            <tr>
+                <td><img src="/products/photo/${product.id}"></td>
+            </tr>
         </table>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <h3>Edit product</h3>
-            <form action="/products/update/${product.id}" method="POST">
+            <form action="/products/update/${product.id}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="id" value="${product.id}">
                 <table>
                     <tr>
@@ -111,9 +115,19 @@
                         </label></td>
                     </tr>
                     <tr>
+                        <td>Photo:</td>
+                        <td><label>
+                            <input name="file" type="file">
+                        </label></td>
+                    </tr>
+                    <tr>
                         <td>
-                            <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
+                            <div class="btn-group">
+                                <button class="btn btn-success btn-lg " type="submit">Update</button>
+                                <button class="btn btn-info btn-lg" type="reset">Reset</button>
+                            </div>
                         </td>
+
                     </tr>
                 </table>
             </form>

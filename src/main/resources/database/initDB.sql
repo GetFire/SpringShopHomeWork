@@ -7,11 +7,10 @@ CREATE TABLE IF NOT EXISTS products (
   manufacturer VARCHAR(30) NOT NULL,
   price        INT         NOT NULL,
   description  VARCHAR(50)          DEFAULT NULL,
+  photo        BLOB,
   PRIMARY KEY (id),
   UNIQUE KEY products_id_uindex (id)
 );
-
-
 
 
 CREATE TABLE IF NOT EXISTS users
@@ -25,11 +24,9 @@ CREATE UNIQUE INDEX users_id_uindex
   ON security.users (id);
 
 
-
-
 CREATE TABLE IF NOT EXISTS roles (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(50) NOT NULL,
+  id   INT(11)     NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY roles_id_uindex (id)
 );
