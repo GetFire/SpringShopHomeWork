@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 
 
@@ -25,7 +26,7 @@
     <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -63,8 +64,10 @@
                 <th>Manufacturer</th>
                 <th>Price</th>
                 <th>Description</th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <th>Edit</th>
                 <th>Delete</th>
+                </sec:authorize>
             </tr>
             <c:forEach var="products" items="${productList}">
                 <tr>
@@ -73,14 +76,17 @@
                     <td>${products.manufacturer}</td>
                     <td>${products.price}</td>
                     <td>${products.description}</td>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <td colspan="2">
                         <p><a href="/products/${products.id}"><button class="btn btn-warning btm-xs">Edit</button></a>
                             <a href="/products/delete/${products.id}"><button class="btn btn-danger btn-xs">Delete</button></a>
                         </p>
                     </td>
+                    </sec:authorize>
                 </tr>
             </c:forEach>
         </table>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <br>
         <h3>Add product</h3>
         <form action="/products/save" method="POST">
@@ -109,6 +115,7 @@
                 </tr>
             </table>
         </form>
+        </sec:authorize>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
