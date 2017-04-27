@@ -1,10 +1,10 @@
 package com.getfire.shop.dao;
 
-import com.getfire.shop.model.Product;
+import com.getfire.shop.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductDao extends JpaRepository<Product,Long> {
-
+public interface RoleDao extends JpaRepository<Role, Long> {
+//public interface RoleDao  {
 }

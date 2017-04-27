@@ -19,26 +19,54 @@
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
 <body>
 
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#responsive-menu">
+                <span class="sr-only">Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GetFireShop</a>
+        </div>
+        <div class=" collapse navbar-collapse" id="responsive-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="/products" class="dropdown-toggle" data-toggle="dropdown">Products <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/products">See all </a></li>
+                        <li><a href="/products/update/">Update</a></li>
+                    </ul>
+                </li>
+                <li><a href="/user">Users</a></li>
+            </ul>
+            <button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#modal-login">
+                <i class="fa fa-sign-in"></i> Login
+            </button>
+
+        </div>
+    </div>
+</div>
+
 <div class="container">
 
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
-        <spring:bind path="login">
+        <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="login" class="form-control" placeholder="Login"
+                <form:input type="text" path="username" class="form-control" placeholder="Username"
                             autofocus="true"></form:input>
-                <form:errors path="login"></form:errors>
+                <form:errors path="username"></form:errors>
             </div>
         </spring:bind>
 
@@ -63,6 +91,6 @@
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

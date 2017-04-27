@@ -8,42 +8,41 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-//@Component
-//public class UserValidator implements Validator {
-public class UserValidator  {
+@Component
+public class UserValidator implements Validator {
 
-//    private UserService userService;
-//
-//    @Autowired
-//    public UserValidator(UserService userService) {
-//        this.userService = userService;
-//    }
-//
-//    @Override
-//    public boolean supports(Class<?> clazz) {
-//        return User.class.equals(clazz);
-//    }
-//
-//    @Override
-//    public void validate(Object object, Errors errors) {
-//        User user = (User) object;
-//
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "Required");
-//        if (user.getLogin().length() < 6 || user.getLogin().length() > 30) {
-//            errors.rejectValue("login", "Size.loginForm.login");
-//        }
-//        if (userService.findByLogin(user.getLogin()) != null) {
-//            errors.rejectValue("login", "Duplicate.loginForm.login");
-//        }
-//
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
-//
-//        if (user.getPassword().length() < 6 || user.getPassword().length() > 30) {
-//            errors.rejectValue("password", "Size.loginForm.password");
-//        }
-//
-//        if (!user.getConfirmPassword().equals(user.getPassword())) {
-//            errors.rejectValue("password", "Different.loginForm.password");
-//        }
-//    }
+    private final UserService userService;
+
+    @Autowired
+    public UserValidator(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return User.class.equals(clazz);
+    }
+
+    @Override
+    public void validate(Object object, Errors errors) {
+        User user = (User) object;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 30) {
+            errors.rejectValue("username", "Size.userForm.username");
+        }
+        if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("username", "Duplicate.userForm.username");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
+
+        if (user.getPassword().length() < 6 || user.getPassword().length() > 30) {
+            errors.rejectValue("password", "Size.userForm.password");
+        }
+
+        if (!user.getConfirmPassword().equals(user.getPassword())) {
+            errors.rejectValue("confirmPassword", "Different.userForm.password");
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.getfire.shop.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
-@Data
+@Getter
+@Setter
 public class Product extends AbstractModel {
     @Column(name = "name")
     private String name;
@@ -18,5 +19,4 @@ public class Product extends AbstractModel {
     private int price;
     @Column(name = "description")
     private String description;
-
 }

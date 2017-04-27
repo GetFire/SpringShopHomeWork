@@ -1,7 +1,8 @@
-package com.getfire.shop.service;
+package com.getfire.shop.service.implementations;
 
 import com.getfire.shop.dao.ProductDao;
 import com.getfire.shop.model.Product;
+import com.getfire.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,29 +21,34 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     public void saveProduct(Product product) {
-        productDao.addProduct(product);
+        productDao.saveAndFlush(product);
+//        productDao.addProduct(product);
 
 
     }
 
     @Transactional
     public List<Product> findAllProducts() {
-        return productDao.getAllProducts();
+//        return productDao.getAllProducts();
+        return productDao.findAll();
     }
 
     @Transactional
     public Product findProductById(long id) {
-        return productDao.findById(id);
+//        return productDao.findById(id);
+        return productDao.findOne(id);
     }
 
     @Transactional
     public void deleteProduct(long id) {
-        productDao.deleteProduct(id);
+        productDao.delete(id);
+//        productDao.deleteProduct(id);
 
     }
 
     @Transactional
     public void updateProduct(Product product) {
-        productDao.updateProduct(product);
+        productDao.saveAndFlush(product);
+//        productDao.updateProduct(product);
     }
 }

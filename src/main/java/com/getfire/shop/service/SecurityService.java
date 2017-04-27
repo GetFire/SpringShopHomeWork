@@ -2,8 +2,8 @@ package com.getfire.shop.service;
 
 public interface SecurityService {
 
-//    String findLoggedInLogin();
-//
-//
-//    void autoLogin(String login, String password);
+    String findLoggedInUsername();
+
+
+    void autoLogin(String username, String password);
 }

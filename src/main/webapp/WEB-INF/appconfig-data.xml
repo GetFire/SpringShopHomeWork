@@ -2,63 +2,47 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/data/jpa
                            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!--<tx:annotation-driven/>-->
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/security?autoReconnect=true&amp;useSSL=false"/>
-        <property name="user" value="root"/>
-        <property name="password" value="admin"/>
-        <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="10"/>
-        <property name="acquireIncrement" value="1"/>
-    </bean>
+    <jpa:repositories base-package="com.getfire.shop.dao"/>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.getfire.shop.model"/>
-        <property name="hibernateProperties">
+        <property name="packagesToScan" value="com.getfire.shop"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
     </bean>
 
-    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource1"/>-->
-        <!--<property name="packagesToScan" value="com.getfire.shop.model"/>-->
-        <!--<property name="jpaVendorAdapter">-->
-            <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>-->
-        <!--</property>-->
-        <!--<property name="jpaProperties">-->
-            <!--<props>-->
-                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>-->
-                <!--<prop key="hibernate.show_sql">true</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--<property name="entityManagerFactory" ref="entityManagerFactory"/>-->
-    <!--</bean>-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
 
-    <!--<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-        <!--<property name="driverClassName" value="${jdbc.driverClassName}"/>-->
-        <!--<property name="url" value="${jdbc.url}"/>-->
-        <!--<property name="username" value="${jdbc.username}"/>-->
-        <!--<property name="password" value="${jdbc.password}"/>-->
-    <!--</bean>-->
+    <context:property-placeholder location="classpath:database/database.properties"/>
 
-    <!--<jpa:repositories base-package="com.getfire.shop.dao.jpaDao"/>-->
+
+
+
 
 </beans>

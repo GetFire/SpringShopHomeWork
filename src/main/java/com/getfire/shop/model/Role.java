@@ -1,7 +1,6 @@
 package com.getfire.shop.model;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Data
-@ToString
+@Getter
+@Setter
 public class Role extends AbstractModel {
 
     @Column(name = "name")

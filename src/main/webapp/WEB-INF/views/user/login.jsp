@@ -24,10 +24,40 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#responsive-menu">
+                <span class="sr-only">Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GetFireShop</a>
+        </div>
+        <div class=" collapse navbar-collapse" id="responsive-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="/products" class="dropdown-toggle" data-toggle="dropdown">Products <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/products">See all </a></li>
+                        <li><a href="/products/update/">Update</a></li>
+                    </ul>
+                </li>
+                <li><a href="/user">Users</a></li>
+            </ul>
+            <button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#modal-login">
+                <i class="fa fa-sign-in"></i> Login
+            </button>
+
+        </div>
+    </div>
+</div>
 
 <div class="container">
 
@@ -36,14 +66,14 @@
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Login"
+            <input name="username" type="text" class="form-control" placeholder="Username"
                    autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+            <h4 class="text-center"><a href="${contextPath}/user/registration">Create an account</a></h4>
         </div>
 
     </form>
@@ -51,6 +81,6 @@
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

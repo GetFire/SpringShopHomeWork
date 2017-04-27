@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -45,7 +47,7 @@
                         <li><a href="/products/update/">Update</a></li>
                     </ul>
                 </li>
-                <li><a href="/users">Users</a></li>
+                <li><a href="/user">Users</a></li>
             </ul>
         </div>
     </div>
@@ -60,7 +62,9 @@
                 <th>MANUFACTURER</th>
                 <th>PRICE</th>
                 <th>DESCRIPTION</th>
-                <th>DELETE</th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <th>DELETE</th>
+                </sec:authorize>
             </tr>
             <tr>
                 <td hidden>${product.id}</td>
@@ -68,48 +72,52 @@
                 <td>${product.manufacturer}</td>
                 <td>${product.price}</td>
                 <td>${product.description}</td>
-                <td>
-                    <a href="/products/delete/${product.id}" class="btn">
-                        <button class="btn btn-danger btn-sm btn-block">Delete</button>
-                    </a>
-                </td>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <td>
+                        <a href="/products/delete/${product.id}" class="btn">
+                            <button class="btn btn-danger btn-sm btn-block">Delete</button>
+                        </a>
+                    </td>
+                </sec:authorize>
             </tr>
         </table>
-        <h3>Edit product</h3>
-        <form action="/products/update/${product.id}" method="POST">
-            <input type="hidden" name="id" value="${product.id}">
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><label>
-                        <input type="text" name="name" value="${product.name}">
-                    </label></td>
-                </tr>
-                <tr>
-                    <td>Manufacturer:</td>
-                    <td><label>
-                        <input type="text" name="manufacturer" value="${product.manufacturer}">
-                    </label></td>
-                </tr>
-                <tr>
-                    <td>Price:</td>
-                    <td><label>
-                        <input type="text" name="price" value="${product.price}">
-                    </label></td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td><label>
-                        <input type="text" name="description" value="${product.description}">
-                    </label></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <h3>Edit product</h3>
+            <form action="/products/update/${product.id}" method="POST">
+                <input type="hidden" name="id" value="${product.id}">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><label>
+                            <input type="text" name="name" value="${product.name}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer:</td>
+                        <td><label>
+                            <input type="text" name="manufacturer" value="${product.manufacturer}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td><label>
+                            <input type="text" name="price" value="${product.price}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td><label>
+                            <input type="text" name="description" value="${product.description}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </sec:authorize>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -3,6 +3,7 @@ package com.getfire.shop.controller;
 import com.getfire.shop.model.Product;
 import com.getfire.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,19 +21,21 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String addProducts(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
         return "redirect:/products";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/delete/{id}")
     public String deleteProduct(@PathVariable long id) {
         productService.deleteProduct(id);
         return "redirect:/products";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/update/{id}")
     public String updateProduct(@ModelAttribute("product") Product product,
                                 @PathVariable long id) {
