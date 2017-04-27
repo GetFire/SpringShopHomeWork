@@ -21,6 +21,7 @@
 
 
         <logout logout-success-url="/user/login?logout"/>
+        <csrf/>
 
     </http>
 

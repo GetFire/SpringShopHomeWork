@@ -57,7 +57,7 @@ public class UserController {
         return "/user/login";
     }
 
-    @RequestMapping(value = "/user/welcome", method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/welcome","/user"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "/user/welcome";
     }

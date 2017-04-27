@@ -14,8 +14,8 @@
     <import resource="appconfig-security.xml"/>
 
 
-    <context:component-scan base-package="com.getfire.shop"/>
+    <context:component-scan base-package="com.getfire.shop" annotation-config="true"/>
 
-    <context:property-placeholder location="classpath:database/database.properties"/>
+
 
 </beans>
