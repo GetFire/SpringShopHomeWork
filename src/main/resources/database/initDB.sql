@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS products (
   manufacturer VARCHAR(30) NOT NULL,
   price        INT         NOT NULL,
   description  VARCHAR(50)          DEFAULT NULL,
-  photo        BLOB,
+  photo        MEDIUMBLOB,
   PRIMARY KEY (id),
   UNIQUE KEY products_id_uindex (id)
 );
