@@ -1,4 +1,7 @@
-CREATE TABLE products (
+CREATE DATABASE security;
+
+
+CREATE TABLE IF NOT EXISTS products (
   id           INT         NOT NULL AUTO_INCREMENT,
   name         VARCHAR(30) NOT NULL,
   manufacturer VARCHAR(30) NOT NULL,
@@ -11,7 +14,7 @@ CREATE TABLE products (
 
 
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
   id       INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   login    VARCHAR(30)     NOT NULL,
@@ -24,7 +27,7 @@ CREATE UNIQUE INDEX users_id_uindex
 
 
 
-CREATE TABLE roles (
+CREATE TABLE IF NOT EXISTS roles (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   PRIMARY KEY (id),
@@ -32,7 +35,7 @@ CREATE TABLE roles (
 );
 
 
-CREATE TABLE users_roles
+CREATE TABLE IF NOT EXISTS user_roles
 (
   user_id INT NOT NULL,
   role_id INT NOT NULL,
