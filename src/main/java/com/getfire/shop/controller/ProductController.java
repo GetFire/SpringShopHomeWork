@@ -50,14 +50,6 @@ public class ProductController {
                 System.err.println("Error saving uploaded file");
             }
             product.setPhoto(photo);
-        }else {
-            System.out.println("**************************");
-            System.out.println("*******************************");
-            System.out.println();
-            System.out.println("NUL");
-            System.out.println();
-            System.out.println("************************************");
-            System.out.println("*******************************");
         }
         productService.saveProduct(product);
         return "redirect: /products";
