@@ -33,7 +33,7 @@
 
 
     <beans:bean id="userDetailsServiceImpl"
-                class="com.getfire.shop.service.implementations.UserDetailsServiceImpl"></beans:bean>
+                class="com.getfire.shop.service.implementations.UserDetailsServiceImpl"/>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

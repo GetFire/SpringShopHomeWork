@@ -40,7 +40,7 @@
         <div class=" collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="/products" >Products </a>
+                    <a href="/products">Products </a>
 
                 </li>
                 <li><a href="/user">Users</a></li>
@@ -112,9 +112,11 @@
                     </tr>
                     <tr>
                         <td>Photo:</td>
-                        <td><label>
-                            <input name="file" type="file">
-                        </label></td>
+                        <td>
+                            <label>
+                                <input name="file" type="file">
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td>
